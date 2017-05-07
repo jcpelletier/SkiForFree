@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/ThirdParty/molamola/Flat Icons/scenes/example.unity
+  isLoaded: 1
+  isActive: 1
