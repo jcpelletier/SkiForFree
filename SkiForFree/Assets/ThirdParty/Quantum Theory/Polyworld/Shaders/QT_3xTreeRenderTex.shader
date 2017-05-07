@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 //borrowed from unity shader source
 Shader "Hidden/QuantumTheory/PolyWorld Tree Rendertex A" {
 Properties {
@@ -39,7 +41,7 @@ float2 CalcTreeLightingParams(float3 normal, float3 lightDir, float3 viewDir)
 
 v2f vert (appdata_full v) {
 	v2f o;
-	o.pos = mul (UNITY_MATRIX_MVP, v.vertex);
+	o.pos = UnityObjectToClipPos (v.vertex);
 	o.uv = v.texcoord.xy;
 	float3 viewDir = normalize(ObjSpaceViewDir(v.vertex));
 	
