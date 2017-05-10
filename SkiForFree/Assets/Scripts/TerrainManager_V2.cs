@@ -18,6 +18,9 @@ public class TerrainManager_V2 : MonoBehaviour {
     private static TerrainManager_V2 _instance;
     public static TerrainManager_V2 Instance { get { return _instance; } }
 
+    // Hack -- remove
+    private Rigidbody _playerRigidbody;
+
     // Instantiate singleton pattern --
     private void Awake()
     {
@@ -29,6 +32,9 @@ public class TerrainManager_V2 : MonoBehaviour {
 
     void Start () {
         _gameManager = GameManager_V2.Instance;
+
+        // Hack -- remove
+        _playerRigidbody = _gameManager.player.GetComponent<Rigidbody>();
 
         InstantiatePlane(new Vector3(0, -1, 0));
 	}
@@ -63,15 +69,19 @@ public class TerrainManager_V2 : MonoBehaviour {
             _planes.Add(position, go);
         }
     }
-
+    
     // Use the player to raycast downwards so we know what plane the player is currently on
     void GetActivePlane()
     {
         Transform player = _gameManager.player;
         RaycastHit hit = new RaycastHit();
-
+        
         if (Physics.Raycast(player.position, -Vector3.up, out hit))
         {
+            // Hack -- remove
+            if (hit.distance > 5)
+                _playerRigidbody.AddForce(_gameManager.player.transform.up * -100);
+            
             if (activePlane != hit.transform.gameObject || activePlane == null)
                 CheckSurroundingPlanes(hit.collider.transform.position);
 

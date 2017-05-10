@@ -42,7 +42,7 @@ public class SkiPlayerController : MonoBehaviour {
 		{
 			rb.AddTorque (transform.up * - RollStrength);
 			rb.AddForce (transform.right * -TurnStrength);
-			//Debug.Log ("go left");
+			Debug.Log ("go left");
 		}
 
 		if (Input.GetKey("d"))
