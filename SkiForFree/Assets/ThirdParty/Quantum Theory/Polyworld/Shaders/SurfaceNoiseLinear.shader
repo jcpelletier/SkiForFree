@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 // Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
 // Shader created with Shader Forge v1.28 
@@ -92,7 +94,7 @@ Shader "QuantumTheory/PolyWorld/SurfaceNoise Linear" {
                 float4 _OffsetMap_var = tex2Dlod(_OffsetMap,float4(TRANSFORM_TEX(node_7017, _OffsetMap),0.0,0));
                 v.vertex.xyz += ((_OffsetMap_var.rgb*2.0+-1.0)*(_Intensity*float3(0,2,0)));
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex );
+                o.pos = UnityObjectToClipPos(v.vertex );
                 return o;
             }
             void frag(
@@ -244,7 +246,7 @@ Shader "QuantumTheory/PolyWorld/SurfaceNoise Linear" {
                 v.vertex.xyz += ((_OffsetMap_var.rgb*2.0+-1.0)*(_Intensity*float3(0,2,0)));
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
                 float3 lightColor = _LightColor0.rgb;
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex );
+                o.pos = UnityObjectToClipPos(v.vertex );
                 UNITY_TRANSFER_FOG(o,o.pos);
                 TRANSFER_VERTEX_TO_FRAGMENT(o)
                 return o;
@@ -410,7 +412,7 @@ Shader "QuantumTheory/PolyWorld/SurfaceNoise Linear" {
                 v.vertex.xyz += ((_OffsetMap_var.rgb*2.0+-1.0)*(_Intensity*float3(0,2,0)));
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
                 float3 lightColor = _LightColor0.rgb;
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex );
+                o.pos = UnityObjectToClipPos(v.vertex );
                 UNITY_TRANSFER_FOG(o,o.pos);
                 TRANSFER_VERTEX_TO_FRAGMENT(o)
                 return o;
@@ -518,7 +520,7 @@ Shader "QuantumTheory/PolyWorld/SurfaceNoise Linear" {
                 float4 _OffsetMap_var = tex2Dlod(_OffsetMap,float4(TRANSFORM_TEX(node_7017, _OffsetMap),0.0,0));
                 v.vertex.xyz += ((_OffsetMap_var.rgb*2.0+-1.0)*(_Intensity*float3(0,2,0)));
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex );
+                o.pos = UnityObjectToClipPos(v.vertex );
                 TRANSFER_SHADOW_CASTER(o)
                 return o;
             }
