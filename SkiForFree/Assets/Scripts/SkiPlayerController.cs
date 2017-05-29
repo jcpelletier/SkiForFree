@@ -5,12 +5,7 @@ using UnityEngine.UI;
 
 public class SkiPlayerController : MonoBehaviour {
 	Rigidbody rb;
-
-	public Text ScoreText;
-	string ScoreString;
-	int ScoreInt;
-	float ScoreFloat;
-
+    
 	public int TurnStrength;
 	public int RollStrength;
 	public int ForwardStrength;
@@ -19,7 +14,6 @@ public class SkiPlayerController : MonoBehaviour {
 	bool JumpReady;
 	// Use this for initialization
 	void Start () {
-		ScoreFloat = 0.0f;
 		JumpReady = true;
 		rb = GetComponent<Rigidbody>();
 	}
@@ -30,13 +24,6 @@ public class SkiPlayerController : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void FixedUpdate () {
-		//Scoring
-		ScoreFloat = ScoreFloat + Time.deltaTime;
-		ScoreInt = (int)ScoreFloat;
-		ScoreString = ScoreInt.ToString();
-		ScoreText.text = ScoreString;
-
-
 		// Controls
 		if (Input.GetKey("a"))
 		{

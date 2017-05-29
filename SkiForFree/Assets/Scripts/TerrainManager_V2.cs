@@ -137,8 +137,8 @@ public class TerrainManager_V2 : MonoBehaviour {
         {
             GameObject go = Instantiate(terrainObjects[Random.Range(0, terrainObjects.Length - 1)]);
 
-            float xOffset = 0;//tileSize * 10 * 2.25f;
-            float zOffset = 0;//xOffset / 2.25f;
+            //float xOffset = 0;//tileSize * 10 * 2.25f;
+            //float zOffset = 0;//xOffset / 2.25f;
 
             float x = Random.Range(0, -tileSize * 10 * 2);
             float z = Random.Range(0, tileSize * 10);
@@ -147,6 +147,9 @@ public class TerrainManager_V2 : MonoBehaviour {
             go.transform.localRotation = Quaternion.AngleAxis(30, Vector3.left);
             go.AddComponent<TerrainObject_V2>();
             go.transform.localPosition = new Vector3(x, -1, z);
+
+            Collider c = go.AddComponent<BoxCollider>();
+            go.tag = "Obstacle";
         }
     }
 
