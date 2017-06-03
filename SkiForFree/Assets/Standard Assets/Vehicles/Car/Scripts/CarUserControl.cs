@@ -7,6 +7,7 @@ namespace UnityStandardAssets.Vehicles.Car
     [RequireComponent(typeof (CarController))]
     public class CarUserControl : MonoBehaviour
     {
+		public float turn = 1;
         private CarController m_Car; // the car controller we want to use
 
 
@@ -16,6 +17,17 @@ namespace UnityStandardAssets.Vehicles.Car
             m_Car = GetComponent<CarController>();
         }
 
+		public void TurnLeft()
+		{
+			//float turn = 1;
+			m_Car.Move(-0.5f, 0, 0, 0f);
+		}
+
+		public void TurnRight()
+		{
+			//float turn = -1;
+			m_Car.Move(0.5f, 0, 0, 0f);
+		}
 
         private void FixedUpdate()
         {
@@ -24,9 +36,9 @@ namespace UnityStandardAssets.Vehicles.Car
             float v = CrossPlatformInputManager.GetAxis("Vertical");
 #if !MOBILE_INPUT
             float handbrake = CrossPlatformInputManager.GetAxis("Jump");
-            m_Car.Move(h, v, v, handbrake);
+            
 #else
-            m_Car.Move(h, v, v, 0f);
+            //m_Car.Move(h, v, v, 0f);
 #endif
         }
     }
