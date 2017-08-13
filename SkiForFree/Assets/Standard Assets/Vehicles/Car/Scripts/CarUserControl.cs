@@ -7,43 +7,38 @@ namespace UnityStandardAssets.Vehicles.Car
     [RequireComponent(typeof (CarController))]
     public class CarUserControl : MonoBehaviour
     {
-		public bool turn = false;
-		public bool turnleft = false;
-		public bool turnright = false;
 
+		Rigidbody rb;
+		public bool JumpReady = true;
+		public int JumpStrength = 10;
         private CarController m_Car; // the car controller we want to use
 
 		private void Update()
 		{
-			#if UNITY_ANDROID
-			if (turn)
-			{
-				m_Car.Move(0.0f, 0, 0, 0f);
-			}
 
-			#endif
 		}
 
         private void Awake()
         {
             // get the car controller
+			JumpReady = true;
             m_Car = GetComponent<CarController>();
+			rb = GetComponent<Rigidbody>();
         }
 
 		public void TurnLeft()
 		{
-			//float turn = 1;
-			//m_Car.Move(-0.5f, 0, 0, 0f);
-			turnleft = true;
-			turnright = false;
+
 		}
 
 		public void TurnRight()
 		{
-			//m_Car.Move(0.5f, 0, 0, 0f);
-			Debug.Log("Right!");
-			turnright = true;
-			turnleft = false;
+
+		}
+
+		void OnCollisionEnter(Collision collision)
+		{
+			JumpReady = true;
 		}
 
         private void FixedUpdate()
@@ -53,6 +48,14 @@ namespace UnityStandardAssets.Vehicles.Car
             // pass the input to the car!
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
+
+			if ((Input.touchCount > 1 || Input.GetKey("space")) && JumpReady) 
+			{
+				rb.AddForce (transform.up * JumpStrength, ForceMode.Impulse);
+				Debug.Log ("Jump");
+				//JumpReady = false;
+			}
+
 			if (Input.touchCount > 0) 
 			{ // touch controls
 
@@ -67,6 +70,8 @@ namespace UnityStandardAssets.Vehicles.Car
 				{
 					m_Car.Move (0.0f, 0, 0, 0f);
 				}
+
+
 				
 			}
 

@@ -76,7 +76,7 @@ public class TerrainManager_V2 : MonoBehaviour {
         Transform player = _gameManager.player;
         RaycastHit hit = new RaycastHit();
         
-        if (Physics.Raycast(player.position, -Vector3.up, out hit))
+		if (Physics.Raycast(player.position, -Vector3.up, out hit))
         {
             // Hack -- remove
             if (hit.distance > 5)
@@ -144,7 +144,7 @@ public class TerrainManager_V2 : MonoBehaviour {
             float z = Random.Range(0, tileSize * 10);
 
             go.transform.parent = terrain.transform;
-            go.transform.localRotation = Quaternion.AngleAxis(30, Vector3.left);
+            go.transform.localRotation = Quaternion.AngleAxis(135, Vector3.left);
             go.AddComponent<TerrainObject_V2>();
             go.transform.localPosition = new Vector3(x, -1, z);
         }

@@ -29,7 +29,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
             if (Time.time > m_LastOkTime + m_WaitTime)
             {
-                RightCar();
+                //RightCar();
             }
         }
 
