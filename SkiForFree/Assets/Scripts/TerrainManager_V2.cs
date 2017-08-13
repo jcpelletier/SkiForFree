@@ -76,7 +76,7 @@ public class TerrainManager_V2 : MonoBehaviour {
         Transform player = _gameManager.player;
         RaycastHit hit = new RaycastHit();
         
-		if (Physics.Raycast(player.position, -Vector3.up, out hit))
+		if (Physics.Raycast(player.position, transform.up, out hit))
         {
             // Hack -- remove
             if (hit.distance > 5)
